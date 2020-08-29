@@ -1,6 +1,7 @@
 import express from "express";
 import dotnev from "dotenv";
 import path from "path";
+import * as routes from "./routes";
 
 dotnev.config();
 
@@ -10,9 +11,7 @@ const app = express();
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 
-app.get("/", (req, res) => {
-  res.render("index");
-});
+routes.register(app);
 
 app.listen(port, () => {
   // tslint:disable-next-line:no-console
