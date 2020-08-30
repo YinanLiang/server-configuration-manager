@@ -1,7 +1,7 @@
 import express from "express";
 import dotnev from "dotenv";
 import * as routes from "./routes";
-import * as models from "./models";
+import { createConnection } from "typeorm";
 
 dotnev.config();
 
@@ -9,11 +9,11 @@ const port = process.env.SERVER_PORT;
 const app = express();
 
 routes.register(app);
-models
-  .migrate()
+
+createConnection()
   .then((connection) => {
     // tslint:disable-next-line:no-console
-    console.log("Connection Established");
+    console.log("DB Connection Established");
   })
   .catch((error) => {
     // tslint:disable-next-line:no-console

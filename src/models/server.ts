@@ -1,4 +1,6 @@
-import { Entity, Column, PrimaryGeneratedColumn } from "typeorm";
+import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from "typeorm";
+import { Location } from "./location";
+import { NetworkInterfaceCard } from "./networkInterfaceCard";
 
 @Entity()
 export class Server {
@@ -18,4 +20,8 @@ export class Server {
   type: string;
   @Column()
   serialNumber: string;
+  @ManyToOne((type) => Location, (location) => location.servers)
+  location: Location;
+  @ManyToOne((type) => NetworkInterfaceCard, (nic) => nic.server)
+  networkInterfaceCards: NetworkInterfaceCard;
 }
