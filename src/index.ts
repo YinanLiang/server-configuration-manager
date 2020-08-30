@@ -2,12 +2,14 @@ import express from "express";
 import dotnev from "dotenv";
 import * as routes from "./routes";
 import { createConnection } from "typeorm";
+import bodyParse from "body-parser";
 
 dotnev.config();
 
 const port = process.env.SERVER_PORT;
 const app = express();
 
+app.use(bodyParse.json());
 routes.register(app);
 
 createConnection()
