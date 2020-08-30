@@ -16,7 +16,7 @@ export class SwitchPort {
   @Column({ nullable: true })
   portNumber: string;
 
-  @ManyToOne((type) => Switch, (sw) => sw.ports, { cascade: true })
+  @ManyToOne((type) => Switch, (sw) => sw.ports)
   switch: Switch;
 
   @OneToOne((type) => NetworkInterfaceCard, (nic) => nic.switchPort)
