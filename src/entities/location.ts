@@ -6,12 +6,22 @@ import { Switch } from "./switch";
 export class Location {
   @PrimaryGeneratedColumn()
   id: number;
-  @Column()
+
+  @Column({ nullable: true })
   name: string;
-  @Column()
+
+  @Column({ nullable: true })
   description: string;
+
   @OneToMany((type) => Server, (server) => server.location)
   servers: Server[];
+
   @OneToMany((type) => Switch, (sw) => sw.location)
   switches: Switch[];
+
+  constructor(req?: any) {
+    this.id = req && req.id;
+    this.name = req && req.name;
+    this.description = req && req.description;
+  }
 }

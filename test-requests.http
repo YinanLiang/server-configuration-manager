@@ -3,8 +3,8 @@ POST http://localhost:9999/locations
 Content-Type: application/json
 
 {
-    "name": "melbourne",
-    "description": "Melourne DC"
+    "name": "sydney",
+    "description": "Sydney DC"
 }
 
 ###
@@ -13,7 +13,20 @@ GET http://localhost:9999/locations
 
 ###
 # Get location by id 
-GET http://localhost:9999/locations/1
+GET http://localhost:9999/locations/2
+
+###
+# Create server
+POST http://localhost:9999/servers
+Content-Type: application/json
+
+{
+    "ip": "testIP",
+    "hostname": "testhostname",
+    "location": {
+        "name": "testLocation"
+    }
+}
 
 
 

@@ -12,14 +12,26 @@ import { SwitchPort } from "./switchPort";
 export class NetworkInterfaceCard {
   @PrimaryGeneratedColumn()
   id: number;
-  @Column()
+
+  @Column({ nullable: true })
   name: string;
-  @Column()
+
+  @Column({ nullable: true })
   macAddress: string;
-  @Column()
+
+  @Column({ nullable: true })
   bandWidth: string;
+
   @ManyToOne((type) => Server, (server) => server.networkInterfaceCards)
   server: Server;
+
   @OneToOne((type) => SwitchPort, (swPort) => swPort.networkInterfaceCard)
   switchPort: SwitchPort;
+
+  constructor(obj?: any) {
+    this.id = obj && obj.id;
+    this.name = obj && obj.name;
+    this.macAddress = obj && obj.macAddress;
+    this.bandWidth = obj && obj.bandWidth;
+  }
 }

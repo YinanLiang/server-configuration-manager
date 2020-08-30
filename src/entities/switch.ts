@@ -12,16 +12,34 @@ import { SwitchPort } from "./switchPort";
 export class Switch {
   @PrimaryGeneratedColumn()
   id: number;
-  @Column()
+
+  @Column({ nullable: true })
   ip: string;
-  @Column()
+
+  @Column({ nullable: true })
   model: string;
-  @Column()
+
+  @Column({ nullable: true })
   osVersion: string;
-  @Column()
+
+  @Column({ nullable: true })
   serialNumber: string;
-  @ManyToOne((type) => Location, (location) => location.switches)
+
+  @ManyToOne((type) => Location, (location) => location.switches, {
+    cascade: true,
+  })
   location: Location;
-  @OneToMany((type) => SwitchPort, (swPort) => swPort.switch)
+
+  @OneToMany((type) => SwitchPort, (swPort) => swPort.switch, {
+    cascade: true,
+  })
   ports: SwitchPort[];
+
+  constructor(obj?: any) {
+    this.id = obj && obj.id;
+    this.ip = obj && obj.ip;
+    this.model = obj && obj.model;
+    this.osVersion = obj && obj.osVersion;
+    this.serialNumber = obj && obj.serialNumber;
+  }
 }
