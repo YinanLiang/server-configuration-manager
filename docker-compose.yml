@@ -9,3 +9,22 @@ services:
             - ./database:/var/lib/postgresql/data
         ports:
             - "5432:5432"
+    api:
+        build: api
+        environment: 
+            - NODE_ENV=development
+            - SERVER_PORT=9999
+            - TYPEORM_CONNECTION=postgres 
+            - TYPEORM_HOST=db
+            - TYPEORM_USERNAME=postgres
+            - TYPEORM_PASSWORD=p@ssw0rd42
+            - TYPEORM_DATABASE=postgres
+            - TYPEORM_PORT=5432
+            - TYPEORM_SYNCHRONIZE=true
+            - TYPEORM_LOGGING=true
+            - TYPEORM_ENTITIES=./entities/*.js
+        depends_on: 
+            - db
+        ports: 
+            - "9999:9999"
+        command: sh -c './wait-for-it.sh db:5432 -- node index.js'
