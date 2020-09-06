@@ -9,8 +9,10 @@ export const register = (app: express.Application) => {
     getRepository(Location)
       .findOne(locationId)
       .then((location) => {
-        // tslint:disable-next-line:no-console
         res.send(JSON.stringify(location));
+      })
+      .catch((error) => {
+        res.status(500).json(error);
       });
   });
 
@@ -21,8 +23,7 @@ export const register = (app: express.Application) => {
         res.send(JSON.stringify(locations));
       })
       .catch((error) => {
-        // tslint:disable-next-line:no-console
-        console.log(error);
+        res.status(500).json(error);
       });
   });
 
@@ -34,8 +35,7 @@ export const register = (app: express.Application) => {
         res.status(201).json(createdLocation);
       })
       .catch((error) => {
-        // tslint:disable-next-line:no-console
-        console.log(error);
+        res.status(500).json(error);
       });
   });
 
@@ -48,8 +48,7 @@ export const register = (app: express.Application) => {
         res.status(201).json(createdServer);
       })
       .catch((error) => {
-        // tslint:disable-next-line:no-console
-        console.log(error);
+        res.status(500).json(error);
       });
   });
 
@@ -60,8 +59,7 @@ export const register = (app: express.Application) => {
         res.send(JSON.stringify(servers));
       })
       .catch((error) => {
-        // tslint:disable-next-line:no-console
-        console.log(error);
+        res.status(500).json(error);
       });
   });
 };
